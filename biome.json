@@ -1,0 +1,22 @@
+{
+    "formatter": {
+        "enabled": true,
+        "formatWithErrors": false,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineEnding": "lf",
+        "lineWidth": 130,
+        "attributePosition": "auto"
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "correctness": {
+                "useExhaustiveDependencies": "warn"
+            },
+            "suspicious": {
+                "noArrayIndexKey": "off"
+                }
+      }
+    }
+  }
