@@ -2,16 +2,16 @@
 import React from 'react';
 import { useColorScheme } from 'nativewind';
 import { ScrollView, View, Text, useWindowDimensions } from 'react-native';
+import { GridStyles } from '../../styles/global';
 
-const DAYS_IN_YEAR = () => {
+const DAYS_PER_YEAR = () => {
   const year = new Date().getFullYear();
   return ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) ? 366 : 365;
 };
 
 // 优化后的布局参数
 const COLUMNS = 14; // 减少每行列数
-const GRID_ITEM_SIZE = 20; // 增大格子尺寸
-const VERTICAL_SPACING = 8; // 增加垂直间距
+
 
 export default function YearScreen() {
   const { colorScheme } = useColorScheme();
@@ -24,7 +24,7 @@ export default function YearScreen() {
   });
 
   // 新的间距计算方式
-  const gap = (screenWidth - 24 * 2 - GRID_ITEM_SIZE * COLUMNS) / (COLUMNS - 1);
+  const gap = (screenWidth - 24 * 2 - GridStyles.gridItem.height * COLUMNS) / (COLUMNS-1);
 
   // 颜色逻辑保持不变
   const getDayColor = (dayNumber: number) => {
@@ -47,52 +47,30 @@ export default function YearScreen() {
     return () => clearInterval(interval);
   }, []);
 
+  const renderDays = () => {
+    return Array.from({ length: DAYS_PER_YEAR() }).map((_, index) => {
+      const isLastInRow = (index + 1) % 14 === 0;
+
+      return (
+        <View
+          key={index}
+          style={[
+            GridStyles.gridItem,
+            { 
+              marginRight: isLastInRow ? 0 : gap, // 单独控制水平间距
+              backgroundColor: getDayColor(index + 1),
+            },
+          ]}
+        />
+      );
+    });
+  };
+
   return (
-    <ScrollView
-      contentContainerStyle={{
-        flexGrow: 1,
-        padding: 24, // 增加容器内边距
-        backgroundColor: colorScheme === 'dark' ? '#000000' : '#FFFFFF',
-      }}
-    >
+    <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[GridStyles.scrollViewContainer, {backgroundColor:colorScheme === 'dark' ? GridStyles.ThemeDark.backgroundColor : GridStyles.ThemeWhite.backgroundColor}]}>
       <Text>{getCurrentYear()}</Text>
-
-
-      <View style={{ 
-        flexDirection: 'row', 
-        flexWrap: 'wrap',
-        marginBottom: -VERTICAL_SPACING // 补偿最后一行的间距
-      }}>
-        {Array.from({ length: DAYS_IN_YEAR() }).map((_, index) => {
-          const dayNumber = index + 1;
-          const isLastInRow = (index + 1) % COLUMNS === 0;
-
-          return (
-            <View
-              key={dayNumber}
-              style={{
-                width: GRID_ITEM_SIZE,
-                height: GRID_ITEM_SIZE,
-                marginRight: isLastInRow ? 0 : gap,
-                marginBottom: VERTICAL_SPACING,
-                borderRadius: 4, // 增加圆角
-                backgroundColor: getDayColor(dayNumber),
-                shadowColor: colorScheme === 'dark' ? '#FFF' : '#000', // 添加微阴影
-                shadowOffset: { width: 0, height: 1 },
-                shadowOpacity: 0.1,
-                shadowRadius: 1,
-                elevation: 1,
-              }}
-            />
-          );
-        })}
-
-        <Text className="text-black dark:text-white text-lg mb-4">
-          {currentDay} / {DAYS_IN_YEAR()}
-        </Text>
-      </View>
-
-
+      <View style={GridStyles.gridContainer}>{renderDays()}</View>
+      <Text>{currentDay} / {DAYS_PER_YEAR()}</Text>
     </ScrollView>
   );
 }
