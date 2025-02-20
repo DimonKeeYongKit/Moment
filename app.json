@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Moment",
-    "slug": "Moment",
+    "slug": "moment",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -32,6 +32,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "4a5b9b1a-bd3b-476e-8a51-f548b4622a58"
+      }
+    },
+    "owner": "dimonkee"
   }
 }

@@ -15,7 +15,7 @@ export const GridStyles = StyleSheet.create({
         borderRadius: 5,
         marginBottom: 8,
     },
-    currentTime:{
+    goldColor:{
         backgroundColor: '#FFD700',
     },
     ThemeGrey:{
@@ -23,9 +23,17 @@ export const GridStyles = StyleSheet.create({
     },
     ThemeDark:{
         backgroundColor: '#000000',
+        color: '#FFFFFF',
     },
     ThemeWhite:{
         backgroundColor: '#FFFFFF',
+        color: '#000000',
     },
-
+    sectionTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginTop: 16,
+        marginBottom: 8,
+    }
 });
+

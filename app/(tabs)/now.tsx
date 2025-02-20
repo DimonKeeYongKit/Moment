@@ -67,9 +67,9 @@ export default function NowScreen() {
 
 	return (
 		<ScrollView contentContainerStyle={[GridStyles.scrollViewContainer, {backgroundColor:colorScheme === 'dark' ? GridStyles.ThemeDark.backgroundColor : GridStyles.ThemeWhite.backgroundColor}]}>
-      <Text>{formatHrs(currentTime)}</Text>
+			<Text>{formatHrs(currentTime)}</Text>
 			<View style={GridStyles.gridContainer}>{renderSeconds()}</View>
-      <Text>{currentSecond} / {SECOND_PER_MINUTE}</Text>
+			<Text>{currentSecond} / {SECOND_PER_MINUTE}</Text>
 		</ScrollView>
 	);
 }

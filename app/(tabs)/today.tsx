@@ -41,6 +41,7 @@ export default function TodayScreen() {
 
 			return (
 				<View
+				className="bg-white dark:bg-black"
 					key={index}
 					style={[
 						GridStyles.gridItem,
@@ -55,7 +56,7 @@ export default function TodayScreen() {
 	};
 
 	return (
-		<ScrollView contentContainerStyle={[GridStyles.scrollViewContainer, {backgroundColor:colorScheme === 'dark' ? GridStyles.ThemeDark.backgroundColor : GridStyles.ThemeWhite.backgroundColor}]}>
+		<ScrollView className="" contentContainerStyle={[GridStyles.scrollViewContainer, {backgroundColor:colorScheme === 'dark' ? GridStyles.ThemeDark.backgroundColor : GridStyles.ThemeWhite.backgroundColor}]}>
 			<View style={GridStyles.gridContainer}>{renderHours()}</View>
       <Text>{currentHour} / {HOUR_PER_DAY}</Text>
 		</ScrollView>
