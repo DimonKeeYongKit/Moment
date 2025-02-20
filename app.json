@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Moment",
-    "slug": "moment",
+    "name": "Moment-pre",
+    "slug": "moment-pre",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
